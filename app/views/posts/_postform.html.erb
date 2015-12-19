@@ -1,23 +1,32 @@
-<% if @post.errors.any? %>
-    <ul>
-        <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<%= render 'sharedviews/errors', obj: @post %>
+
+<div class = "row">
+    <div class = "col-xs-12">
+        <%= form_for(@post, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+        <div class = "form-group">
+            <div class="col-sm-2 control-label">
+                <%= f.label :title %>
+            </div>
+            <div class = "col-sm-8">
+                <%= f.text_field :title, class: "form-control", placeholder: "article title", autofocus: true %>
+            </div>
+        </div>
+        <div class = "form-group">
+            <div class="col-sm-2 control-label">
+                <%= f.label :description %>
+            </div>
+            <div class = "col-sm-8">
+                <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "this is where you can put the contents of your article..." %>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <%= f.submit class: "btn btn-success btn-lg" %>
+                <%= link_to "Cancel & Return to List", posts_path, class: "btn btn-danger btn-lg" %>
+            </div>
+        </div>
+
         <% end %>
-    </ul>
-<% end %>
 
-<%= form_for @post do |f| %>
-
-    <p>
-        <%= f.label :title %><br/>
-        <%= f.text_field :title %>
-    </p>
-    <p>
-        <%= f.label :description %><br>
-        <%= f.text_area :description %>
-    </p>
-    <p>
-        <%= f.submit %>
-    </p>
-
-<% end %>
+    </div>
+</div>
