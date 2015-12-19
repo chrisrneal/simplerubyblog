@@ -1,19 +1,25 @@
-<h1>List all Articles</h1>
+<div class="center">
+    <%= link_to 'Create a new article', new_post_path, class: "btn btn-success" %>
+</div>
 
-<%= link_to 'Create a new article', new_post_path %> <br/>
 
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-    </tr>
-    <% @posts.each do |post| %>
-        <tr>
-            <td><%= post.title %></td>
-            <td><%= post.description %></td>
-            <td><%= link_to 'Edit', edit_post_path(post) %></td>
-            <td><%= link_to 'Show', post_path(post) %></td>
-            <td><%= link_to 'Delete', post_path(post), method: :delete, data: {confirm: "Are you sure?"} %></td>
-        </tr>
-    <% end %>
-</table>
+<% @posts.each do |post| %>
+    
+    <div class="col-xs-8 col-xs-offset-2">
+        <h2 class="center">
+            <%= post.title %>
+        </h2> 
+    </div>
+    
+    <div class="well col-xs-8 col-xs-offset-2">
+        <h4>Description</h4>
+        <hr>
+        <%= simple_format post.description %>
+        <div class="post-actions">
+            <%= link_to 'edit this article', edit_post_path(post), class: "btn btn-xs btn-primary" %>
+            <%= link_to 'delete this article', post_path(post), method: :delete, 
+                data: {confirm: "are you sure?"}, class: "btn btn-xs btn-danger" %>
+        </div>
+    </div>
+
+<% end %>
