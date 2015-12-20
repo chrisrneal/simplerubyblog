@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   
   get 'about' => 'pages#about'
+  get 'signup', to: 'users#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
   #   resources :products
   
   resources :posts
+  resources :users, except: [:new]
+
 
   # Example resource route with options:
   #   resources :products do
