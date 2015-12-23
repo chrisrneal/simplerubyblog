@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
 
-before_action :set_user, only: [:update, :edit]
+before_action :set_user, only: [:update, :edit, :show]
 
 def index
 end
 
 def new
     @user = User.new
+end
+
+def show
+    @posts = @user.posts
 end
 
 def edit

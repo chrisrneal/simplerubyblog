@@ -1,0 +1,8 @@
+<h1 class="center"><%= @user.username.titleize %>'s Profile</h1>
+<br>
+<div class="row">
+    <div class="col-xs-4 col-xs-offset-4 center">
+        <img src="<%= gravitar_for @user, 150 %>" class="img-circle">
+    </div>
+</div>
+<%= render 'posts/showposts' %>
