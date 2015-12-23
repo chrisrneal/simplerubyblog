@@ -1,5 +1,11 @@
 <div class="center">
     <%= link_to 'Create a new article', new_post_path, class: "btn btn-success" %>
 </div>
+<div align="center">
+    <%= will_paginate %>
+</div>
 <hr>
 <%= render 'posts/showposts' %>
+<div align="center">
+    <%= will_paginate %>
+</div>

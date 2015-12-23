@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 before_action :set_user, only: [:update, :edit, :show]
 
 def index
-    @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 25)
 end
 
 def new
@@ -11,7 +11,7 @@ def new
 end
 
 def show
-    @posts = @user.posts
+    @posts = @user.posts.paginate(page: params[:page], per_page: 5)
 end
 
 def edit
