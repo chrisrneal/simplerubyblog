@@ -11,7 +11,7 @@
         <hr>
         <%= simple_format post.description %>
         <small>
-            created by: <%= post.user.username if post.user %>, <%= time_ago_in_words(post.created_at) %> ago, last updated <%= time_ago_in_words(post.updated_at) %>
+            created by: <%= link_to post.user.username, user_path(post.user) if post.user %>, <%= time_ago_in_words(post.created_at) %> ago, last updated <%= time_ago_in_words(post.updated_at) %>
         </small>
         <div class="post-actions">
             <%= link_to 'edit this article', edit_post_path(post), class: "btn btn-xs btn-primary" %>

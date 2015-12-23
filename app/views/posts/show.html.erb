@@ -16,3 +16,7 @@
     </div>
 </div>
 
+<div class="well col-xs-8 col-xs-offset-2">
+    <p><img src="<%= gravitar_for @post.user if @post.user %>"></p>
+    <p>This article was posted by <%= link_to @post.user.username, user_path(@post.user) if @post.user %> <%= time_ago_in_words(@post.created_at) %> ago and was last modified <%= time_ago_in_words(@post.updated_at) %> ago. </p>
+</div>
