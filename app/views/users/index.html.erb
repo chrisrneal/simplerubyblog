@@ -1,0 +1,25 @@
+<h1 class="center">Users List</h1>
+
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Image</th>
+        <th>Username</th>
+        <th>Email Address</th>
+        <th>Articles</th>
+        <th>Actions</th>
+    </tr>
+    <% i = 1 %>
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= i %></td>
+            <td><img src="<%= gravitar_for user, 30 %>" class="img-circle"></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td><%= pluralize user.posts.count, "article" %></td>
+            <td><%= link_to 'Edit', edit_user_path(user), class: "btn btn-xs btn-primary" %>
+            <%= link_to 'Delete', user_path(user), method: :delete, class: "btn btn-xs btn-danger" %></td>
+            <% i = i + 1 %>
+        </tr>
+    <% end %>
+</table>
