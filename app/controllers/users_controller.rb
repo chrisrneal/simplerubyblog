@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
 before_action :set_user, only: [:update, :edit, :show]
+before_action :require_user, except: [:create, :new]
+before_action :require_spec_user, only: [:edit, :update]
 
 def index
     @users = User.paginate(page: params[:page], per_page: 25)
@@ -44,5 +46,13 @@ private
     end
     def user_params
         params.require(:user).permit(:username, :email, :password)
+    end
+    def require_spec_user
+        if @user == current_user
+            return
+        end
+        
+        flash[:danger] = "You do not have access to this feature"
+        redirect_to posts_path
     end
 end

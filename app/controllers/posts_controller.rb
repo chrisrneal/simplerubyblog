@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
 
     before_action :set_article, only: [:edit, :update, :destroy, :show]
+    before_action :require_user, except: [:show, :index]
+    before_action :require_spec_user, only: [:edit, :update, :destroy]
 
     def index
         @posts = Post.paginate(page: params[:page], per_page: 5)
@@ -12,6 +14,7 @@ class PostsController < ApplicationController
     
     def create
         @post = Post.new(post_parms)
+        @post.user = current_user
         if @post.save
             flash[:success] = "Article was successfully created"
             redirect_to post_path(@post)
@@ -50,6 +53,14 @@ class PostsController < ApplicationController
         end
         def post_parms
             params.require(:post).permit(:title, :description)
+        end
+        def require_spec_user
+            if @post.user == current_user
+                return
+            end
+            
+            flash[:danger] = "You do not have access to this feature"
+            redirect_to posts_path
         end
 
 end

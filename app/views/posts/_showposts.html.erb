@@ -13,11 +13,13 @@
         <small>
             created by: <%= link_to post.user.username, user_path(post.user) if post.user %>, <%= time_ago_in_words(post.created_at) %> ago, last updated <%= time_ago_in_words(post.updated_at) %>
         </small>
-        <div class="post-actions">
-            <%= link_to 'edit this article', edit_post_path(post), class: "btn btn-xs btn-primary" %>
-            <%= link_to 'delete this article', post_path(post), method: :delete, 
-                data: {confirm: "are you sure?"}, class: "btn btn-xs btn-danger" %>
-        </div>
+        <% if logged_in? && current_user == post.user %>
+            <div class="post-actions">
+                <%= link_to 'edit this article', edit_post_path(post), class: "btn btn-xs btn-primary" %>
+                <%= link_to 'delete this article', post_path(post), method: :delete, 
+                    data: {confirm: "are you sure?"}, class: "btn btn-xs btn-danger" %>
+            </div>
+        <% end %>
     </div>
 
 <% end %>

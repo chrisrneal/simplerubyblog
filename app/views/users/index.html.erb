@@ -16,11 +16,15 @@
         <tr>
             <td><%= i %></td>
             <td><img src="<%= gravitar_for user, 30 %>" class="img-circle"></td>
-            <td><%= user.username %></td>
+            <td><%= link_to user.username, user_path(user) %></td>
             <td><%= user.email %></td>
             <td><%= pluralize user.posts.count, "article" %></td>
-            <td><%= link_to 'Edit', edit_user_path(user), class: "btn btn-xs btn-primary" %>
-            <%= link_to 'Delete', user_path(user), method: :delete, class: "btn btn-xs btn-danger" %></td>
+            <td>
+                <% if user == current_user %>
+                    <%= link_to 'Edit', edit_user_path(user), class: "btn btn-xs btn-primary" %>
+                    <%= link_to 'Delete', user_path(user), method: :delete, class: "btn btn-xs btn-danger" %>
+                <% end %>
+            </td>
             <% i = i + 1 %>
         </tr>
     <% end %>
