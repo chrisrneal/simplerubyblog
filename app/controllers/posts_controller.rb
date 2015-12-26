@@ -55,7 +55,7 @@ class PostsController < ApplicationController
             params.require(:post).permit(:title, :description)
         end
         def require_spec_user
-            if @post.user == current_user
+            if @post.user == current_user || current_user.is_admin
                 return
             end
             

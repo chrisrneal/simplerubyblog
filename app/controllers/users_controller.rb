@@ -32,6 +32,7 @@ end
 
 def create
     @user = User.new(user_params)
+    @user.is_admin = false
     if @user.save
         flash[:success] = "User was created successfully"
         redirect_to posts_path
@@ -48,7 +49,7 @@ private
         params.require(:user).permit(:username, :email, :password)
     end
     def require_spec_user
-        if @user == current_user
+        if @user == current_user || current_user.is_admin
             return
         end
         

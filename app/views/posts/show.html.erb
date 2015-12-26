@@ -9,9 +9,11 @@
     <hr>
     <%= simple_format @post.description %>
     <div class="post-actions">
-        <%= link_to 'edit this article', edit_post_path(@post), class: "btn btn-xs btn-primary" %>
-        <%= link_to 'delete this article', post_path(@post), method: :delete, 
-            data: {confirm: "are you sure?"}, class: "btn btn-xs btn-danger" %>
+        <% if logged_in && (current_user == post.user || current_user.is_admin) %>
+            <%= link_to 'edit this article', edit_post_path(@post), class: "btn btn-xs btn-primary" %>
+            <%= link_to 'delete this article', post_path(@post), method: :delete, 
+                data: {confirm: "are you sure?"}, class: "btn btn-xs btn-danger" %>
+        <% end %>
         <%= link_to 'back to articles', posts_path, class: "btn btn-xs btn-success" %>
     </div>
 </div>

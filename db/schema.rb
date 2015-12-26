@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151220040319) do
+ActiveRecord::Schema.define(version: 20151225162055) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20151220040319) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+    t.boolean  "is_admin"
   end
 
 end
