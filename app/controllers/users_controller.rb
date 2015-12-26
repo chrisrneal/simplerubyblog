@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-before_action :set_user, only: [:update, :edit, :show]
-before_action :require_user, except: [:create, :new]
-before_action :require_spec_user, only: [:edit, :update]
+before_action :set_user, only: [:update, :edit, :show, :destroy]
+before_action :require_user, except: [:create, :new, :destroy]
+before_action :require_spec_user, only: [:edit, :update, :destroy]
 
 def index
     @users = User.paginate(page: params[:page], per_page: 25)
@@ -20,6 +20,14 @@ def edit
 #    @user = User.find(params[:id])
 end
 
+def destroy
+    if @user == current_user
+        session[:user_id] = nil
+    end
+    flash[:danger] = @user.destroy ? "User was successfully deleted" : "User was not deleted"
+    redirect_to users_path
+end
+
 def update
 #    @user = User.find(params[:id])
     if @user.update(user_params)
@@ -35,7 +43,8 @@ def create
     @user.is_admin = false
     if @user.save
         flash[:success] = "User was created successfully"
-        redirect_to posts_path
+        session[:user_id] = @user.id
+        redirect_to user_path(@user)
     else
         render 'new'
     end
@@ -46,7 +55,7 @@ private
         @user = User.find(params[:id])
     end
     def user_params
-        params.require(:user).permit(:username, :email, :password)
+        params.require(:user).permit(:username, :email, :password, :is_admin)
     end
     def require_spec_user
         if @user == current_user || current_user.is_admin
