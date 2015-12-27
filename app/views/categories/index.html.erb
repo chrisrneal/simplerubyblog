@@ -6,6 +6,7 @@
     <tr>
         <th>#</th>
         <th>Category Name</th>
+        <th># of articles</th>
         <th>Actions</th>
     </tr>
     <% i = 1 %>
@@ -13,6 +14,7 @@
         <tr>
             <td><%= i %></td>
             <td><%= link_to category.name, category_path(category) %></td>
+            <td><%= pluralize category.posts.count, "article" %></td>
             <td>
                 <% if logged_in? && current_user.is_admin %>
                     <%= link_to 'Edit', edit_category_path(category), class: "btn btn-xs btn-primary" %>

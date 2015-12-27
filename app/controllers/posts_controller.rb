@@ -52,7 +52,7 @@ class PostsController < ApplicationController
             @post = Post.find(params[:id])
         end
         def post_parms
-            params.require(:post).permit(:title, :description)
+            params.require(:post).permit(:title, :description, category_ids: [])
         end
         def require_spec_user
             if @post.user == current_user || current_user.is_admin
