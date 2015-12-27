@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   
   resources :posts
   resources :users, except: [:new]
+  resources :categories, except: [:destroy]
 
 
   # Example resource route with options:
